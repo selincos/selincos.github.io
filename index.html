@@ -147,7 +147,6 @@
       padding: 64px 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .kicker {
@@ -215,7 +214,15 @@
     .side-nav a:hover, .side-nav a.active { color: var(--text); }
     .side-nav a:hover .nav-line, .side-nav a.active .nav-line { width: 40px; background: var(--accent); }
 
-    .sidebar-footer { display: flex; align-items: center; gap: 10px; }
+    .top-actions {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
     .content {
       flex: 1;
@@ -281,7 +288,7 @@
 
     @media (max-width: 900px) {
       .layout { flex-direction: column; gap: 0; padding: 0 24px; }
-      .sidebar { position: static; min-height: auto; padding: 40px 0 8px; }
+      .sidebar { position: static; min-height: auto; padding: 72px 0 8px; }
       .sidebar .lede { max-width: none; }
       .side-nav { flex-direction: row; flex-wrap: wrap; gap: 18px; margin-bottom: 24px; }
       .side-nav a .nav-line { display: none; }
@@ -289,10 +296,28 @@
       .about-grid { grid-template-columns: 1fr; }
       .job { grid-template-columns: 1fr; gap: 4px; }
     }
+
+    @media (max-width: 420px) {
+      .top-actions { top: 14px; right: 14px; gap: 6px; }
+      .top-actions .icon-btn { width: 30px; height: 30px; }
+      .top-actions .icon-btn svg { width: 14px; height: 14px; }
+    }
   </style>
 </head>
 
 <body data-theme="dark">
+
+  <div class="top-actions">
+    <a class="icon-btn" href="https://github.com/selincos" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+    </a>
+    <a class="icon-btn" href="https://www.linkedin.com/in/selin-cosar/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 16 16"><path d="M14.82 0H1.18C.53 0 0 .52 0 1.16v13.68C0 15.48.53 16 1.18 16h13.64c.65 0 1.18-.52 1.18-1.16V1.16C16 .52 15.47 0 14.82 0ZM4.75 13.65H2.4V6.14h2.35v7.51ZM3.58 5.1a1.36 1.36 0 1 1 0-2.72 1.36 1.36 0 0 1 0 2.72Zm10.07 8.55h-2.35V9.99c0-.9-.02-2.05-1.25-2.05-1.25 0-1.44.98-1.44 1.99v3.72H6.26V6.14h2.26v1.03h.03c.31-.6 1.09-1.24 2.24-1.24 2.4 0 2.84 1.58 2.84 3.63v4.09Z"/></svg>
+    </a>
+    <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+      <svg viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8ZM8 0a.6.6 0 0 1 .6.6v1.5a.6.6 0 1 1-1.2 0V.6A.6.6 0 0 1 8 0Zm0 13.9a.6.6 0 0 1 .6.6v1.5a.6.6 0 1 1-1.2 0v-1.5a.6.6 0 0 1 .6-.6ZM16 8a.6.6 0 0 1-.6.6h-1.5a.6.6 0 1 1 0-1.2h1.5A.6.6 0 0 1 16 8ZM2.1 8a.6.6 0 0 1-.6.6H.1a.6.6 0 1 1 0-1.2h1.5a.6.6 0 0 1 .6.6Zm11.16-5.26a.6.6 0 0 1 0 .85l-1.06 1.06a.6.6 0 1 1-.85-.85l1.06-1.06a.6.6 0 0 1 .85 0ZM3.75 12.4a.6.6 0 0 1 0 .84l-1.06 1.07a.6.6 0 1 1-.85-.85l1.06-1.06a.6.6 0 0 1 .85 0Zm9.51 1.91a.6.6 0 0 1-.85 0l-1.06-1.06a.6.6 0 1 1 .85-.85l1.06 1.06a.6.6 0 0 1 0 .85ZM3.75 3.6a.6.6 0 0 1-.85 0L1.84 2.54a.6.6 0 1 1 .85-.85L3.75 2.75a.6.6 0 0 1 0 .85Z"/></svg>
+    </button>
+  </div>
 
   <div class="layout">
     <aside class="sidebar" id="top">
@@ -307,17 +332,6 @@
           <a href="#contact"><span class="nav-line"></span>Contact</a>
         </nav>
       </div>
-      <div class="sidebar-footer">
-        <a class="icon-btn" href="https://github.com/selincos" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-        </a>
-        <a class="icon-btn" href="https://www.linkedin.com/in/selin-cosar/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 16 16"><path d="M14.82 0H1.18C.53 0 0 .52 0 1.16v13.68C0 15.48.53 16 1.18 16h13.64c.65 0 1.18-.52 1.18-1.16V1.16C16 .52 15.47 0 14.82 0ZM4.75 13.65H2.4V6.14h2.35v7.51ZM3.58 5.1a1.36 1.36 0 1 1 0-2.72 1.36 1.36 0 0 1 0 2.72Zm10.07 8.55h-2.35V9.99c0-.9-.02-2.05-1.25-2.05-1.25 0-1.44.98-1.44 1.99v3.72H6.26V6.14h2.26v1.03h.03c.31-.6 1.09-1.24 2.24-1.24 2.4 0 2.84 1.58 2.84 3.63v4.09Z"/></svg>
-        </a>
-        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-          <svg viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8ZM8 0a.6.6 0 0 1 .6.6v1.5a.6.6 0 1 1-1.2 0V.6A.6.6 0 0 1 8 0Zm0 13.9a.6.6 0 0 1 .6.6v1.5a.6.6 0 1 1-1.2 0v-1.5a.6.6 0 0 1 .6-.6ZM16 8a.6.6 0 0 1-.6.6h-1.5a.6.6 0 1 1 0-1.2h1.5A.6.6 0 0 1 16 8ZM2.1 8a.6.6 0 0 1-.6.6H.1a.6.6 0 1 1 0-1.2h1.5a.6.6 0 0 1 .6.6Zm11.16-5.26a.6.6 0 0 1 0 .85l-1.06 1.06a.6.6 0 1 1-.85-.85l1.06-1.06a.6.6 0 0 1 .85 0ZM3.75 12.4a.6.6 0 0 1 0 .84l-1.06 1.07a.6.6 0 1 1-.85-.85l1.06-1.06a.6.6 0 0 1 .85 0Zm9.51 1.91a.6.6 0 0 1-.85 0l-1.06-1.06a.6.6 0 1 1 .85-.85l1.06 1.06a.6.6 0 0 1 0 .85ZM3.75 3.6a.6.6 0 0 1-.85 0L1.84 2.54a.6.6 0 1 1 .85-.85L3.75 2.75a.6.6 0 0 1 0 .85Z"/></svg>
-        </button>
-      </div>
     </aside>
 
     <main class="content">
@@ -329,13 +343,16 @@
           <div class="about-body">
             <p>
               Software Engineer at <a href="https://www.asml.com/en" target="_blank" rel="noopener">ASML</a> in Amsterdam,
-              previously at Aselsan. Computer Engineering graduate of
-              <a href="https://www.hacettepe.edu.tr/english/" target="_blank" rel="noopener">Hacettepe University</a>.
+              previously at Aselsan. Focused on scalable systems, clean APIs and solid data models.
             </p>
             <blockquote class="quote">
               "Curiosity-driven software engineer passionate about scalable solutions and lifelong learning."
             </blockquote>
-            <p><strong>Hobbies:</strong></p>
+            <p><strong>Education:</strong></p>
+            <div class="chips">
+              <span class="tag">🎓 <a href="https://www.hacettepe.edu.tr/english/" target="_blank" rel="noopener">Hacettepe University</a> · Computer Engineering</span>
+            </div>
+            <p style="margin-top: 16px;"><strong>Hobbies:</strong></p>
             <div class="chips">
               <span class="tag">🏊 Swimming</span>
               <span class="tag">🚴 Cycling</span>
