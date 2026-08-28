@@ -270,21 +270,7 @@
     .job .when { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-dim); padding-top: 3px; }
     .job .role { font-weight: 600; font-size: 0.95rem; margin: 0; }
     .job .company { color: var(--accent); }
-
-    /* Projects */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-
-    .proj-card { padding: 16px; display: flex; flex-direction: column; gap: 8px; min-height: 120px; }
-    .proj-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-
-    .proj-card h3 { margin: 0; font-size: 0.92rem; font-family: 'JetBrains Mono', monospace; }
-    .proj-card p { margin: 0; color: var(--text-dim); font-size: 0.85rem; flex-grow: 1; }
-
-    .proj-meta { display: flex; align-items: center; gap: 14px; font-size: 0.76rem; color: var(--text-dim); }
-
-    .lang-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); display: inline-block; margin-right: 5px; }
-
-    .projects-note { color: var(--text-dim); font-size: 0.85rem; margin-top: 14px; }
+    .job .note { font-size: 0.82rem; color: var(--text-dim); margin: 4px 0 0; }
 
     /* Contact / Footer */
     .contact-box { padding: 32px; text-align: center; background: linear-gradient(160deg, var(--bg-elevated), var(--bg-elevated-2)); }
@@ -318,7 +304,6 @@
         <nav class="side-nav">
           <a href="#about"><span class="nav-line"></span>About</a>
           <a href="#experience"><span class="nav-line"></span>Experience</a>
-          <a href="#projects"><span class="nav-line"></span>Projects</a>
           <a href="#contact"><span class="nav-line"></span>Contact</a>
         </nav>
       </div>
@@ -344,7 +329,7 @@
           <div class="about-body">
             <p>
               Software Engineer at <a href="https://www.asml.com/en" target="_blank" rel="noopener">ASML</a> in Amsterdam,
-              previously at Capgemini Engineering and Aselsan. Computer Engineering graduate of
+              previously at Aselsan. Computer Engineering graduate of
               <a href="https://www.hacettepe.edu.tr/english/" target="_blank" rel="noopener">Hacettepe University</a>.
             </p>
             <blockquote class="quote">
@@ -365,11 +350,10 @@
         <div class="timeline card" style="padding: 4px 20px;">
           <div class="job">
             <div class="when">Jan 2022 — Present</div>
-            <p class="role"><a class="company" href="https://www.asml.com/en" target="_blank" rel="noopener">ASML</a> · Software Engineer</p>
-          </div>
-          <div class="job">
-            <div class="when">Jan 2022 — Feb 2025</div>
-            <p class="role"><a class="company" href="https://capgemini-engineering.com/nl/en/" target="_blank" rel="noopener">Capgemini Engineering</a> · Software Engineer</p>
+            <div>
+              <p class="role"><a class="company" href="https://www.asml.com/en" target="_blank" rel="noopener">ASML</a> · Software Engineer</p>
+              <p class="note">via <a href="https://capgemini-engineering.com/nl/en/" target="_blank" rel="noopener">Capgemini Engineering</a>, Jan 2022 – Feb 2025</p>
+            </div>
           </div>
           <div class="job">
             <div class="when">Jul 2018 — Dec 2021</div>
@@ -390,21 +374,8 @@
         </div>
       </section>
 
-      <section id="projects">
-        <div class="section-head"><span class="num mono">03</span><h2>Projects</h2></div>
-        <div class="projects-grid" id="projects-grid">
-          <div class="card proj-card">
-            <h3>Loading repositories…</h3>
-            <p>Fetching latest public repos from GitHub.</p>
-          </div>
-        </div>
-        <p class="projects-note">
-          Live from <a href="https://github.com/selincos" target="_blank" rel="noopener">github.com/selincos</a> — updates automatically.
-        </p>
-      </section>
-
       <section id="contact">
-        <div class="section-head"><span class="num mono">04</span><h2>Contact</h2></div>
+        <div class="section-head"><span class="num mono">03</span><h2>Contact</h2></div>
         <div class="card contact-box">
           <h2>Let's connect</h2>
           <p>Open to interesting conversations about software, systems and everything in between.</p>
@@ -464,49 +435,6 @@
       }, { rootMargin: '-40% 0px -50% 0px' });
 
       sections.forEach(function (s) { obs.observe(s); });
-    })();
-
-    // Live GitHub projects
-    (function () {
-      var grid = document.getElementById('projects-grid');
-      fetch('https://api.github.com/users/selincos/repos?sort=updated&per_page=100')
-        .then(function (res) { if (!res.ok) throw new Error('GitHub API error'); return res.json(); })
-        .then(function (repos) {
-          var filtered = repos
-            .filter(function (r) { return !r.fork; })
-            .sort(function (a, b) {
-              if (b.stargazers_count !== a.stargazers_count) return b.stargazers_count - a.stargazers_count;
-              return new Date(b.pushed_at) - new Date(a.pushed_at);
-            })
-            .slice(0, 6);
-
-          if (!filtered.length) {
-            grid.innerHTML = '<div class="card proj-card"><h3>No public repositories yet</h3><p>Check back soon, or explore the profile directly on GitHub.</p></div>';
-            return;
-          }
-
-          grid.innerHTML = filtered.map(function (r) {
-            var desc = r.description ? escapeHtml(r.description) : 'No description provided.';
-            var lang = r.language ? '<span><span class="lang-dot"></span>' + escapeHtml(r.language) + '</span>' : '';
-            var stars = r.stargazers_count > 0 ? '<span>★ ' + r.stargazers_count + '</span>' : '';
-            return (
-              '<a class="card proj-card" href="' + r.html_url + '" target="_blank" rel="noopener">' +
-              '<h3>' + escapeHtml(r.name) + '</h3>' +
-              '<p>' + desc + '</p>' +
-              '<div class="proj-meta">' + lang + stars + '</div>' +
-              '</a>'
-            );
-          }).join('');
-        })
-        .catch(function () {
-          grid.innerHTML = '<div class="card proj-card"><h3>Couldn\'t load repositories</h3><p>View them directly on <a href="https://github.com/selincos" target="_blank" rel="noopener">GitHub</a>.</p></div>';
-        });
-
-      function escapeHtml(str) {
-        var div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-      }
     })();
   </script>
 
