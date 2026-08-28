@@ -2,150 +2,619 @@
 <html lang="en">
 
 <head>
-  <title>Selin Cosar</title>
   <meta charset="utf-8">
+  <title>Selin Cosar — Software Engineer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="index.css">
-
+  <meta name="description" content="Selin Cosar — Software Engineer at ASML. Algorithms, database systems, API design.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0e14'/%3E%3Ctext x='50' y='68' font-size='52' font-family='monospace' fill='%2322d3ee' text-anchor='middle'%3E%3C/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    .jumbotron img {
-      opacity: 0.7;
-      width: 100%;
+    :root {
+      --bg: #0a0e14;
+      --bg-elevated: #10151d;
+      --bg-elevated-2: #151b26;
+      --border: #212938;
+      --text: #e6edf3;
+      --text-dim: #8b98a8;
+      --accent: #22d3ee;
+      --accent-2: #818cf8;
+      --radius: 12px;
+      --max-width: 880px;
+      color-scheme: dark;
     }
 
-    .icon img {
-      height: 30px;
+    [data-theme="light"] {
+      --bg: #f7f8fa;
+      --bg-elevated: #ffffff;
+      --bg-elevated-2: #f0f2f5;
+      --border: #e2e5ea;
+      --text: #14181f;
+      --text-dim: #5b6472;
+      --accent: #0891b2;
+      --accent-2: #4f46e5;
+      color-scheme: light;
     }
 
-    .shadow-box {
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .shadow-box:hover {
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
     }
 
-    .social-icons a {
-      margin-right: 10px;
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
     }
 
-    hr {
-      border-top: 1px solid #ccc;
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
-    .footer-text {
-      text-align: center;
-      padding: 20px 0;
-      font-size: 0.9rem;
-      color: #666;
+    /* Nav */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      border-bottom: 1px solid var(--border);
     }
 
-    #map-container {
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 24px;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a { color: var(--text-dim); }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      margin-top: 20px;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .icon-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .icon-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* Hero */
+    .hero {
+      padding: 88px 0 56px;
+    }
+
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.9rem);
+      font-weight: 800;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 .grad {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p.lede {
+      font-size: 1.08rem;
+      color: var(--text-dim);
+      max-width: 620px;
+      margin: 0 0 22px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-dim);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .btn:hover { text-decoration: none; }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Sections */
+    section { padding: 56px 0; border-top: 1px solid var(--border); }
+    section:first-of-type { border-top: none; }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .section-head .num {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .section-head h2 {
+      font-size: 1.4rem;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .avatar {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .about-body p { color: var(--text-dim); margin: 0 0 14px; }
+
+    blockquote.quote {
+      margin: 16px 0;
+      padding: 14px 18px;
+      border-left: 3px solid var(--accent);
+      background: var(--bg-elevated-2);
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+    /* Experience */
+    .timeline { display: flex; flex-direction: column; gap: 4px; }
+
+    .job {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .job:last-child { border-bottom: none; }
+
+    .job .when {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      padding-top: 3px;
+    }
+
+    .job .role { font-weight: 600; font-size: 1rem; margin: 0 0 2px; }
+    .job .company { color: var(--accent); }
+    .job .desc { color: var(--text-dim); font-size: 0.92rem; margin-top: 4px; }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .proj-card {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 128px;
+    }
+
+    .proj-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .proj-card h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .proj-card p {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      flex-grow: 1;
+    }
+
+    .proj-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    .lang-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .projects-note {
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      margin-top: 16px;
+    }
+
+    /* Contact / Footer */
+    .contact-box {
+      padding: 36px;
+      text-align: center;
+      background: linear-gradient(160deg, var(--bg-elevated), var(--bg-elevated-2));
+    }
+
+    .contact-box h2 { margin: 0 0 8px; font-size: 1.5rem; }
+    .contact-box p { color: var(--text-dim); margin: 0 0 20px; }
+
+    footer {
+      padding: 28px 0 48px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    footer .mono { color: var(--text-dim); opacity: 0.7; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; text-align: left; }
+      .job { grid-template-columns: 1fr; gap: 4px; }
     }
   </style>
 </head>
 
-<body>
+<body data-theme="dark">
 
-  <!-- Header Section -->
-  <div class="jumbotron text-center bg-white p-0">
-    <img src="./pocket/images/ams.avif" class="img-fluid" alt="Amsterdam">
-  </div>
-
-  <div class="container">
-    <!-- Social Links Section -->
-    <div class="row mb-5 justify-content-center text-center" id="ConnRow">
-      <div class="col-4 col-sm-2 col-md-1 social-icons">
-        <a href="https://www.linkedin.com/in/selin-cosar/" target="_blank">
-          <img src="./pocket/images/linkedin.svg" class="icon img-fluid" alt="LinkedIn">
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand">selin<span>.</span>cosar</a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-icons">
+        <a class="icon-btn" href="https://github.com/selincos" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
         </a>
-      </div>
-      <div class="col-4 col-sm-2 col-md-1">
-        <a href="https://github.com/selincos" target="_blank">
-          <img src="./pocket/images/github.svg" class="icon img-fluid" alt="Github">
+        <a class="icon-btn" href="https://www.linkedin.com/in/selin-cosar/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 16 16"><path d="M14.82 0H1.18C.53 0 0 .52 0 1.16v13.68C0 15.48.53 16 1.18 16h13.64c.65 0 1.18-.52 1.18-1.16V1.16C16 .52 15.47 0 14.82 0ZM4.75 13.65H2.4V6.14h2.35v7.51ZM3.58 5.1a1.36 1.36 0 1 1 0-2.72 1.36 1.36 0 0 1 0 2.72Zm10.07 8.55h-2.35V9.99c0-.9-.02-2.05-1.25-2.05-1.25 0-1.44.98-1.44 1.99v3.72H6.26V6.14h2.26v1.03h.03c.31-.6 1.09-1.24 2.24-1.24 2.4 0 2.84 1.58 2.84 3.63v4.09Z"/></svg>
         </a>
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <svg id="theme-icon" viewBox="0 0 16 16"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8ZM8 0a.6.6 0 0 1 .6.6v1.5a.6.6 0 1 1-1.2 0V.6A.6.6 0 0 1 8 0Zm0 13.9a.6.6 0 0 1 .6.6v1.5a.6.6 0 1 1-1.2 0v-1.5a.6.6 0 0 1 .6-.6ZM16 8a.6.6 0 0 1-.6.6h-1.5a.6.6 0 1 1 0-1.2h1.5A.6.6 0 0 1 16 8ZM2.1 8a.6.6 0 0 1-.6.6H.1a.6.6 0 1 1 0-1.2h1.5a.6.6 0 0 1 .6.6Zm11.16-5.26a.6.6 0 0 1 0 .85l-1.06 1.06a.6.6 0 1 1-.85-.85l1.06-1.06a.6.6 0 0 1 .85 0ZM3.75 12.4a.6.6 0 0 1 0 .84l-1.06 1.07a.6.6 0 1 1-.85-.85l1.06-1.06a.6.6 0 0 1 .85 0Zm9.51 1.91a.6.6 0 0 1-.85 0l-1.06-1.06a.6.6 0 1 1 .85-.85l1.06 1.06a.6.6 0 0 1 0 .85ZM3.75 3.6a.6.6 0 0 1-.85 0L1.84 2.54a.6.6 0 1 1 .85-.85L3.75 2.75a.6.6 0 0 1 0 .85Z"/></svg>
+        </button>
       </div>
     </div>
+  </header>
 
-    <div class="row">
-      <!-- Profile Section -->
-      <div class="col-sm-5">
-        <div class="shadow-box p-4 mb-5 bg-white rounded">
-          <img src="./pocket/images/selin.jpg" class="img-fluid rounded-circle mb-3" style="opacity: 0.8; width: 50%;" alt="Selin Cosar">
-          <h4>Selin Cosar</h4>
-          <hr>
-          Graduate Student<br>
-          <a href="https://www.hacettepe.edu.tr/english/">Hacettepe University Computer Engineering</a>
-          <p><i>Interests: Algorithms | Database systems | API design </i></p>
-          <blockquote class="blockquote">
-            "curiosity-driven software engineer passionate about scalable solutions and lifelong learning"
+  <main class="wrap" id="top">
+
+    <section class="hero">
+      <div class="kicker">&lt;SoftwareEngineer /&gt;</div>
+      <h1>Hi, I'm Selin Cosar<br><span class="grad">I build reliable software.</span></h1>
+      <p class="lede">
+        Software Engineer at <a href="https://www.asml.com/en" target="_blank" rel="noopener">ASML</a>,
+        based in Amsterdam. Curiosity-driven, focused on scalable systems, clean APIs and solid data models.
+      </p>
+      <div class="tags">
+        <span class="tag">Algorithms</span>
+        <span class="tag">Database Systems</span>
+        <span class="tag">API Design</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/selincos" target="_blank" rel="noopener">View GitHub →</a>
+        <a class="btn btn-ghost" href="#experience">See experience</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-head"><span class="num mono">01</span><h2>About</h2></div>
+      <div class="about-grid">
+        <img class="avatar" src="./pocket/images/selin.jpg" alt="Selin Cosar">
+        <div class="about-body">
+          <p>
+            Graduate Student at
+            <a href="https://www.hacettepe.edu.tr/english/" target="_blank" rel="noopener">Hacettepe University, Computer Engineering</a>,
+            currently working as a Software Engineer at ASML in Amsterdam.
+          </p>
+          <blockquote class="quote">
+            "Curiosity-driven software engineer passionate about scalable solutions and lifelong learning."
           </blockquote>
-          <i>Hobbies:</i><br>
-          Swimming, Cycling, Hiking
+          <p><strong>Hobbies:</strong></p>
+          <div class="chips">
+            <span class="tag">🏊 Swimming</span>
+            <span class="tag">🚴 Cycling</span>
+            <span class="tag">🥾 Hiking</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Industry Experience Section -->
-      <div class="col-sm-5">
-        <div class="shadow-box p-4 mb-5 bg-white rounded">
-          <h4>Industry Experiences</h4>
-          <hr>
-
-          <h5><a href="https://www.asml.com/en" target="_blank">ASML</a> - Software Engineer</h5>
-          <b>January 2022 - Present</b>
-          <br><br>
-
-          <h5><a href="https://capgemini-engineering.com/nl/en/" target="_blank">Capgemini Engineering</a> - Software Engineer</h5>
-          <b>January 2022 - February 2025</b>
-          <br><br>
-
-          <h5><a href="https://www.aselsan.com.tr/en" target="_blank">Aselsan</a> - Software Engineer</h5>
-          <b>July 2018 - December 2021</b>
-          <br><br>
-
-          <h5><a href="https://www.aselsan.com.tr/en" target="_blank">Aselsan</a> - Candidate Software Engineer</h5>
-          <b>February 2018 - June 2018</b>
-          <br><br>
-
-          <h5><a href="http://www.cybersoft.com.tr/ENG/?q=node" target="_blank">Aselsan</a> - Intern</h5>
-          <b>July 2017 - August 2017</b>
-          <br><br>
-
-          <h5><a href="http://www.cybersoft.com.tr/ENG/?q=node" target="_blank">Cybersoft</a> - Intern</h5>
-          <b>June 2016 - July 2016</b>
+    <section id="experience">
+      <div class="section-head"><span class="num mono">02</span><h2>Experience</h2></div>
+      <div class="timeline card" style="padding: 6px 22px;">
+        <div class="job">
+          <div class="when">Jan 2022 — Present</div>
+          <div>
+            <p class="role"><a class="company" href="https://www.asml.com/en" target="_blank" rel="noopener">ASML</a> · Software Engineer</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Jan 2022 — Feb 2025</div>
+          <div>
+            <p class="role"><a class="company" href="https://capgemini-engineering.com/nl/en/" target="_blank" rel="noopener">Capgemini Engineering</a> · Software Engineer</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Jul 2018 — Dec 2021</div>
+          <div>
+            <p class="role"><a class="company" href="https://www.aselsan.com.tr/en" target="_blank" rel="noopener">Aselsan</a> · Software Engineer</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Feb 2018 — Jun 2018</div>
+          <div>
+            <p class="role"><a class="company" href="https://www.aselsan.com.tr/en" target="_blank" rel="noopener">Aselsan</a> · Candidate Software Engineer</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Jul 2017 — Aug 2017</div>
+          <div>
+            <p class="role"><a class="company" href="http://www.cybersoft.com.tr/ENG/?q=node" target="_blank" rel="noopener">Aselsan</a> · Intern</p>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Jun 2016 — Jul 2016</div>
+          <div>
+            <p class="role"><a class="company" href="http://www.cybersoft.com.tr/ENG/?q=node" target="_blank" rel="noopener">Cybersoft</a> · Intern</p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Projects Section -->
-      <div class="col-sm-5">
-        <div class="shadow-box p-4 mb-5 bg-white rounded">
-          <h4>Projects</h4>
-          <!-- Add project details here -->
+    <section id="projects">
+      <div class="section-head"><span class="num mono">03</span><h2>Projects</h2></div>
+      <div class="projects-grid" id="projects-grid">
+        <div class="card proj-card">
+          <h3>Loading repositories…</h3>
+          <p>Fetching latest public repos from GitHub.</p>
         </div>
       </div>
-    </div>
+      <p class="projects-note">
+        Live from <a href="https://github.com/selincos" target="_blank" rel="noopener">github.com/selincos</a> — updates automatically.
+      </p>
+    </section>
 
-    <!-- ClustrMaps Section -->
-    <div id="map-container" class="text-center">
-      <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=EHqyupqdlvBuwcHNF012aCyaehBXB0nZ1IDB77gq9OI&cl=ffffff&w=a"></script>
-    </div>
-
-    <!-- Footer -->
-    <div class="row">
-      <div class="col-12">
-        <p class="footer-text">Copyright © 2024 selincosar - All rights reserved</p>
+    <section id="contact">
+      <div class="section-head"><span class="num mono">04</span><h2>Contact</h2></div>
+      <div class="card contact-box">
+        <h2>Let's connect</h2>
+        <p>Open to interesting conversations about software, systems and everything in between.</p>
+        <div class="cta-row" style="justify-content: center;">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/selin-cosar/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn btn-ghost" href="https://github.com/selincos" target="_blank" rel="noopener">GitHub</a>
+        </div>
       </div>
-    </div>
+    </section>
 
-  </div>
+  </main>
+
+  <footer>
+    <p class="mono">Amsterdam, NL · Built with HTML, CSS &amp; JS</p>
+    <p>© <span id="year"></span> Selin Cosar — All rights reserved</p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    (function () {
+      var root = document.body;
+      var toggle = document.getElementById('theme-toggle');
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      var initial = stored || (prefersLight ? 'light' : 'dark');
+      root.setAttribute('data-theme', initial);
+
+      toggle.addEventListener('click', function () {
+        var current = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', current);
+        try { localStorage.setItem('theme', current); } catch (e) {}
+      });
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Live GitHub projects
+    (function () {
+      var grid = document.getElementById('projects-grid');
+      fetch('https://api.github.com/users/selincos/repos?sort=updated&per_page=100')
+        .then(function (res) { if (!res.ok) throw new Error('GitHub API error'); return res.json(); })
+        .then(function (repos) {
+          var filtered = repos
+            .filter(function (r) { return !r.fork; })
+            .sort(function (a, b) {
+              if (b.stargazers_count !== a.stargazers_count) return b.stargazers_count - a.stargazers_count;
+              return new Date(b.pushed_at) - new Date(a.pushed_at);
+            })
+            .slice(0, 6);
+
+          if (!filtered.length) {
+            grid.innerHTML = '<div class="card proj-card"><h3>No public repositories yet</h3><p>Check back soon, or explore the profile directly on GitHub.</p></div>';
+            return;
+          }
+
+          grid.innerHTML = filtered.map(function (r) {
+            var desc = r.description ? escapeHtml(r.description) : 'No description provided.';
+            var lang = r.language ? '<span><span class="lang-dot"></span>' + escapeHtml(r.language) + '</span>' : '';
+            var stars = r.stargazers_count > 0 ? '<span>★ ' + r.stargazers_count + '</span>' : '';
+            return (
+              '<a class="card proj-card" href="' + r.html_url + '" target="_blank" rel="noopener">' +
+              '<h3>' + escapeHtml(r.name) + '</h3>' +
+              '<p>' + desc + '</p>' +
+              '<div class="proj-meta">' + lang + stars + '</div>' +
+              '</a>'
+            );
+          }).join('');
+        })
+        .catch(function () {
+          grid.innerHTML = '<div class="card proj-card"><h3>Couldn\'t load repositories</h3><p>View them directly on <a href="https://github.com/selincos" target="_blank" rel="noopener">GitHub</a>.</p></div>';
+        });
+
+      function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+    })();
+  </script>
 
 </body>
 
