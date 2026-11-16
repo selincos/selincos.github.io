@@ -301,6 +301,15 @@
     .job .company { color: var(--accent); }
     .job .note { font-size: 0.82rem; color: var(--text-dim); margin: 4px 0 0; }
 
+    /* Projects */
+    .projects { display: flex; flex-direction: column; gap: 16px; }
+    .project { display: grid; grid-template-columns: 64px 1fr; gap: 18px; padding: 20px; }
+    .project:hover { border-color: var(--accent); }
+    .project-icon { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--border); }
+    .project h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .project p { color: var(--text-dim); margin: 0 0 14px; font-size: 0.93rem; }
+    .project .chips { margin-bottom: 16px; }
+
     /* Contact / Footer */
     .contact-box { padding: 32px; text-align: center; background: linear-gradient(160deg, var(--bg-elevated), var(--bg-elevated-2)); }
     .contact-box h2 { margin: 0 0 8px; font-size: clamp(1.15rem, 1rem + 1vw, 1.35rem); }
@@ -328,6 +337,7 @@
       .content { max-width: none; padding: 24px 0 40px; }
       .about-grid { grid-template-columns: 1fr; }
       .job { grid-template-columns: 1fr; gap: 4px; }
+      .project { grid-template-columns: 1fr; gap: 12px; }
     }
 
     @media (max-width: 420px) {
@@ -362,6 +372,7 @@
         <nav class="side-nav">
           <a href="#about"><span class="nav-line"></span>About</a>
           <a href="#experience"><span class="nav-line"></span>Experience</a>
+          <a href="#projects"><span class="nav-line"></span>Projects</a>
           <a href="#contact"><span class="nav-line"></span>Contact</a>
         </nav>
       </div>
@@ -424,8 +435,35 @@
         </div>
       </section>
 
+      <section id="projects">
+        <div class="section-head"><span class="num mono">03</span><h2>Projects</h2></div>
+        <div class="projects">
+          <article class="card project">
+            <img class="project-icon" src="./pocket/images/stopme.png" alt="STOP ME app icon">
+            <div>
+              <h3>STOP ME</h3>
+              <p>
+                A small app that helps you get through sugar cravings. Tap the big red button and it walks you
+                through escalating steps — 4-7-8 breathing, a glass of water, healthier swaps, a reminder of your
+                own goal — and, as a last resort, opens WhatsApp with a ready message to a friend. Every craving
+                you beat is counted as a monthly win.
+              </p>
+              <div class="chips">
+                <span class="tag">Kotlin Multiplatform</span>
+                <span class="tag">Compose Multiplatform</span>
+                <span class="tag">Kotlin/Wasm</span>
+                <span class="tag">iOS · Android · Web</span>
+              </div>
+              <div class="cta-row">
+                <a class="btn btn-primary" href="/stopme-web/" target="_blank" rel="noopener">Open the app ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section id="contact">
-        <div class="section-head"><span class="num mono">03</span><h2>Contact</h2></div>
+        <div class="section-head"><span class="num mono">04</span><h2>Contact</h2></div>
         <div class="card contact-box">
           <h2>Let's connect</h2>
           <p>Open to interesting conversations about software, systems and everything in between.</p>
