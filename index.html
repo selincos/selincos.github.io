@@ -269,8 +269,14 @@
       width: 110px;
       height: 110px;
       border-radius: 50%;
-      object-fit: cover;
       border: 1px solid var(--border);
+      /* Fotoğraf <img> değil arka plan olarak: "Resmi kaydet" menüsü çıkmaz */
+      background-size: cover;
+      background-position: center;
+      -webkit-touch-callout: none;   /* iPhone'da basılı tutunca kaydetme menüsü çıkmasın */
+      -webkit-user-select: none;
+      user-select: none;
+      flex-shrink: 0;
     }
 
     .about-body p { color: var(--text-dim); margin: 0 0 14px; }
@@ -385,7 +391,7 @@
       <section id="about">
         <div class="section-head"><span class="num mono">01</span><h2>About</h2></div>
         <div class="about-grid">
-          <img class="avatar" src="./pocket/images/selin.jpg" alt="Selin Cosar">
+          <div class="avatar" role="img" aria-label="Selin Cosar" style="background-image: url('./pocket/images/selin.jpg')"></div>
           <div class="about-body">
             <p>
               Software engineer with eight years of experience. I enjoy building APIs, working with data,
@@ -499,6 +505,12 @@
         try { localStorage.setItem('theme', current); } catch (e) {}
       });
     })();
+
+    // Profil fotoğrafında sağ tık ve sürükleyerek kaydetmeyi engelle
+    document.querySelectorAll('.avatar').forEach(function (el) {
+      el.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      el.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    });
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
