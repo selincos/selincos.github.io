@@ -1,0 +1,6 @@
+# Profil fotoğrafı sitede görünür ama arama motorlarının görsel sonuçlarına girmesin.
+User-agent: *
+Disallow: /pocket/images/selin.jpg
+
+User-agent: Googlebot-Image
+Disallow: /pocket/images/selin.jpg
